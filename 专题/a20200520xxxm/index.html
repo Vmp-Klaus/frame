@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- 为了防止页面数字被识别为电话号码，可根据实际需要添加： -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 让添加到主屏幕的网页再次打开时全屏展示，可添加：   -->
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tencent-CP" />
+    <meta name="Copyright" content="Tencent" />
+    <meta name="Description" content="页面的描述内容" />
+    <meta name="Keywords" content="页面关键字" />
+    <title>专题主题（标题）- 产品中文全称官方网站 - 腾讯游戏</title>
+    <!-- 页面设计：cp | 页面制作：cp | 创建：2020-05-20 -->
+    <link rel="stylesheet" href="//ossweb-img.qq.com/images/js/swiper/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script>
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            // window.location.href = "PC端专题地址"+location.search;
+        }
+    </script>
+</head>
+<body>
+    <!-- header -->
+        <header class="header dis-flex">
+            <h1 class="header-title dis-flex">
+                <a href="//jxqy.qq.com/m/main.shtml" ontouchend="PTTSendClick('link','logo','头部logo按钮')">
+                    <img class="dis-block" src="ossweb-img/logo.png" alt="新剑侠情缘">
+                </a>
+                <p class="dis-flex font-weight"><strong>新剑侠情缘</strong>2020江湖盛典</p>
+            </h1>
+            <div class="header-btn dis-flex">
+                <p class="download-website font-weight">
+                    <a href="//jxqy.qq.com/m/main.shtml" class="sprite dis-in-block" ontouchend="PTTSendClick('link','website','进入官网按钮')">进入官网</a>
+                    <a href="//jxqy.qq.com/zlkdatasys/mct/d/play.shtml" class="sprite dis-in-block" ontouchend="PTTSendClick('link','download','下载游戏按钮')">下载游戏</a>
+                </p>
+                <div class="btn-nav"><i class="draw" title="导航开关"></i></div>
+            </div>
+            <!-- 导航 -->
+            <nav class="header-nav">
+                <div class="nav-content">
+                    <ul>
+                      <li><a href="//jxqy.qq.com/m/main.shtml" ontouchend="PTTSendClick('link','shouye','首页');">首页</a></li>
+                      <li><a href="//jxqy.qq.com/webplat/info/news_version3/22500/22501/22502/22504/m15192/list_1.shtml" ontouchend="PTTSendClick('link','huodong','热门活动');">热门活动</a></li>
+                      <li><a href="//jxqy.qq.com/webplat/info/news_version3/22500/22501/22502/m15192/list_1.shtml" ontouchend="PTTSendClick('link','xinwen','新闻中心');">新闻中心</a></li>
+                      <li><a href="//jxqy.qq.com/webplat/info/news_version3/22500/22501/22503/m15197/list_1.shtml" ontouchend="PTTSendClick('link','gonglue','游戏攻略');">游戏攻略</a></li>
+                      <li><a href="javascript:alert('敬请期待！');" ontouchend="PTTSendClick('link','tese','游戏特色');">游戏特色</a></li>
+                      <li><a href="//jxqy.gamebbs.qq.com/" ontouchend="PTTSendClick('link','luntan','官方论坛');">官方论坛</a></li>
+                      <li><a href="//jxqy.qq.com/act/agile/48347/index.html" ontouchend="PTTSendClick('link','duihuan','CDKEY兑换');">CDKEY兑换</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- head end -->
+
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.modules.min.js"></script>
+    <script  src="//game.gtimg.cn/images/js/2018foot/foot.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/TGMobileShare/TGMobileShare.min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/swiper/swiper-3.4.2.min.js"></script>
+    <script src='//vm.gtimg.cn/tencentvideo/txp/js/txplayer.js'></script>
+    <script src="js/common.js"></script>
+    <script>
+        //此段代码不能放到外链JS中，
+        var setSite = { //设置网站属性
+            siteType:"a20160711xxx", //必填项:"os"代表是官网，如果不是，则填写actName例如a20160701xxx
+            pageType: "index", //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN
+            pageName: "首页", //必填项:页面中文名
+            project:"base", //选填项:如果是官网模块则是必填;按照模块内容，填写固定的对应值;原生官网base;微社区ingame;同人站doujin;赛事match;故事站story;文化站history;粉丝站fans;爆料站coming;论坛bbs;
+            osact: 'm', //选填项:是否是官网专题(在官网运营的专题)boolean；默认是0；非微社区页面均是1；可以在链接上加入参数osact=1来灵活设置
+            ingame: 0, //选填项:是否投放在游戏APP内boolean；默认是0；可以在链接上加入参数ingame=1来灵活设置
+            stayTime: 0 //选填项:是否需要统计停留时长boolean；默认是0
+        }
+        if (typeof (pgvMain) == 'function') pgvMain();//千万不能忘记！
+        //PTTSendClick('类型或所在区域','按钮英文名','按钮中文名')
+        TGMobileShare({
+        	shareTitle:'demo分享标题', //不设置或设置为空时，页面有title，则调取title
+        	shareDesc:'demo分享详情', //不设置或设置为空时，页面有Description，则调取Description
+        	shareImgUrl:'xxx', //分享图片尺寸200*200，且填写绝对路径
+        	shareLink:'xxx', //分享链接要跟当前页面同域名(手Q分享有这个要求) ,不设置或设置为空时，默认调取当前URL
+        	actName:'demo' //点击流命名，用于统计分享量，专题一般采用目录名称如a20151029demo
+        });
+    </script>
+</body>
+</html>

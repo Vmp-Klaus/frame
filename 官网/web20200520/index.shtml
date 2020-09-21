@@ -4,6 +4,7 @@
     <!--#include virtual="inc/meta.inc" -->
 </head>
 <body>
+    <!--[if lt IE 10]><p class="browser-tips">您的浏览器版本过低，请升级浏览器获得更好的体验<p><![endif]-->
     <div class="wrap"></div>
     <!--#include virtual="inc/footer.inc" -->
     <script>

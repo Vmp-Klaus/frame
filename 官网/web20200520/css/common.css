@@ -51,6 +51,14 @@ ul, ol, li {
     list-style: none;
 }
 
+.browser-tips {
+    background: yellow;
+    text-align: center;
+    line-height: 45px;
+    color: red;
+    font-size: 20px;
+}
+
 /*common*/
 .fl {
     float: left;

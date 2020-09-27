@@ -8,43 +8,44 @@
     <title>异形屏适配</title>
 </head>
 <body>
-<script src="//ossweb-img.qq.com/images/js/zepto/zepto.min.js"></script>
-<script>
-var displayStr = "";
-var orientationDetect = function() {
-    if (displayStr.length > 0) {
-        $(document.body).removeClass(displayStr);
-    }
-    switch (window.orientation) {
-        case 0:
-            //刘海在上边
-            displayStr = "direction_por";
-            console.log('刘海在上边')
-            break;
-        case -90:
-            //刘海在右边
-            displayStr = "direction_land_ops";
-            console.log('刘海在右边')
-            break;
-        case 90:
-            //刘海在左边
-            displayStr = "direction_land";
-            console.log('刘海在左边')
-            break;
-        case 180:
-            //刘海在下边
-            displayStr = "direction_por_ops";
-            console.log('刘海在下边')
-            break;
-    }
-    if(screen.width / screen.height > 190/100){
-        $(document.body).addClass(displayStr);
-    }
-};
-window.addEventListener("DOMContentLoaded", orientationDetect, false);
-window.addEventListener("orientationchange", orientationDetect, false);
-window.addEventListener("resize", orientationDetect, false);
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.min.js"></script>
+    <script>
+        var displayStr = "";
+        var orientationDetect = function() {
+            if (displayStr.length > 0) {
+                $(document.body).removeClass(displayStr);
+            }
+            //document.title=window.innerWidth+','+window.innerHeight;
+            if((window.innerWidth/window.innerHeight) > (190/100)){
+                switch (window.orientation) {
+                    case 0:
+                        //刘海在上边
+                        displayStr = "direction_por";
+                        console.log('刘海在上边')
+                        break;
+                    case -90:
+                        //刘海在右边
+                        displayStr = "direction_land_ops";
+                        console.log('刘海在右边')
+                        break;
+                    case 90:
+                        //刘海在左边
+                        displayStr = "direction-land";
+                        console.log('刘海在左边')
+                        break;
+                    case 180:
+                        //刘海在下边
+                        displayStr = "direction_por_ops";
+                        console.log('刘海在下边')
+                        break;
+                }
+                $(document.body).addClass(displayStr);
+            }
 
-</script>
+        };
+        window.addEventListener("DOMContentLoaded", orientationDetect, false);
+        window.addEventListener("orientationchange", orientationDetect, false);
+        window.addEventListener('resize', orientationDetect, false);
+    </script>
 </body>
 </html>

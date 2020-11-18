@@ -4,8 +4,9 @@
     <!--#include virtual="inc/meta.html" -->
 </head>
 <body>
-    <!--[if lt IE 10]><p class="browser-tips">您的浏览器版本过低，请升级浏览器获得更好的体验<p><![endif]-->
-    <div class="wrap">123</div>
+    <section class="wrap">
+        <!--#include virtual="inc/header.html" -->
+    </section>
     <!--#include virtual="inc/footer.html" -->
     <script>
         //此段代码不能放到外链JS中，
@@ -14,10 +15,17 @@
             pageType:"index", //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN,不支持点(.)、下划线(_)
             pageName:"首页", //必填项:页面中文名
             project:"base", //选填项:如果是官网模块则是必填;按照模块内容，填写固定的对应值;官网微社区base;同人站doujin;赛事match;故事站story;文化站history;粉丝站fans;爆料站coming;论坛bbs;皮肤skin;默认other;
-            osact:'pc' //选填项:默认是0。osact=0表示非官网专题；osact=pc表示pc官网/pc官网专题；osact=m表示移动官网/移动官网专题；osact=ingame表示微社区/微社区专题
+            osact:'m' //选填项:默认是0。osact=0表示非官网专题；osact=pc表示pc官网/pc官网专题；osact=m表示移动官网/移动官网专题；osact=ingame表示微社区/微社区专题
         };
         if (typeof (pgvMain) == 'function') pgvMain();//千万不能忘记！
         //PTTSendClick('类型或所在区域','按钮英文名','按钮中文名')
+        TGMobileShare({
+        	shareTitle:'demo分享标题', //不设置或设置为空时，页面有title，则调取title
+        	shareDesc:'demo分享详情', //不设置或设置为空时，页面有Description，则调取Description
+        	shareImgUrl:'xxx', //分享图片尺寸200*200，且填写绝对路径
+        	shareLink:'xxx', //分享链接要跟当前页面同域名(手Q分享有这个要求) ,不设置或设置为空时，默认调取当前URL
+        	actName:'demo' //点击流命名，用于统计分享量，专题一般采用目录名称如a20151029demo
+        });
     </script>
 </body>
 </html>

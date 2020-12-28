@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>zoom-rem</title>
+    <style>
+        *{padding:0;margin:0;}
+        html{max-width: 1920px;min-width: 1200px;margin: 0 auto;}
+        .main{background: url(ossweb-img/1920.jpg) no-repeat top center / 100% auto;}
+        .main img{display: block;width: 1200px;height: auto;margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <img src="ossweb-img/1920.jpg" alt="">
+    </div>
+    <script src="https://game.gtimg.cn/images/ulink/ulinksdk/jquery-3.4.1.min.js"></script>
+    <script>
+        //页面等比缩放
+        $('.main').css('zoom',document.body.clientWidth / 1920)
+        $(window).resize(function() {
+            $('.main').css('zoom',document.body.clientWidth / 1920)
+        });
+    </script>
+</body>
+</html>

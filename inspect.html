@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="all">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author" content="Tencent-TGideas">
+<meta name="Copyright" content="Tencent">
+<meta name="Description" content="">
+<meta name="Keywords" content="">
+<title>重构规范检测对照表</title>
+<style>
+	body,div,h1,h2,h3,h4,h5,form,img,ul,ol,li,dl,dt,dd,p {margin:0; padding:0;}
+	li {list-style:none;}
+	h1,h2,h3,h4,h5 {font-size:100%;}
+	img {border:0;}
+	table{ border-collapse:collapse;}
+	a {color:#666666; text-decoration:none; outline:none;}
+	a:hover{color:#00787E; text-decoration:none;}
+	* html .q {height:1%;}
+	*+html .q {height:1%;}
+	.q:after {content:""; display:block; height:0; clear:both; overflow:hidden;}
+	.clear {clear:both; height:0px; overflow:hidden;}
+	body {padding:42px 0 0; min-width:1000px; font-size:12px; color:#626262; font-family:Microsoft YaHei; background:#fff;}
+	h1 {font-size:36px; text-align: center;}
+	.tgcp {margin:50px; background-color: #efefef; border-radius: 4px; padding:20px;}
+	.tgcp strong{color:#f00; font-weight: normal;}
+	.tgcp h3{font-size:30px;}
+	.tgcp ul{ line-height: 1.7; padding-bottom:50px;}
+	.tgcp li{padding:0 10px; margin:5px; background-color: #fff; border:1px solid #ccc; border-radius: 4px; position: relative;}
+	.tgcp li div {display:block;margin:0 10px; padding:10px; border:1px solid #ccc; background:#ffffcc; border-radius: 3px; margin-bottom:10px;}
+
+	.tgcp li h4{font-size:18px; padding:5px 0; }
+	.tgcp li h4:after{display:inline-block; text-align: center; line-height: 22px; width:24px; height:24px;border-radius: 50%; font-family: Tahoma; margin-left:10px;}
+	.tgcp li h5{font-size:14px; color: #f00;}
+	.tgcp li p{font-size:12px;}
+	.tgcp li a {display:block; position: absolute; top:8px; right:20px; width:70px; height: 24px; font-size:12px; background-color: #efefef; color:#666; text-align: center; line-height: 24px; border-radius: 4px;}
+	.tgcp li p a {display:inline; position: relative; width:auto; height: 24px; right: 0; top: 0; font-size:12px; background: none; color:#666; text-align: left; line-height: 24px; color:#f00; text-decoration: underline;}
+	.tgcp li a.pass_btn {right:100px; background:#5cbb47; color:#fff;}
+	.tgcp li a.error_btn {right:180px; background:#ffcccc;}
+
+	.tgcp li.error {background:#ffcccc;}
+	.tgcp li.error h4:after{content: '×'; background-color: #f00; color:#fff;}
+	.tgcp li.error .pass_btn {right:100px;}
+	.tgcp li.error .error_btn {display: none;}
+	.tgcp li.pass {background:#5cbb47;}
+	.tgcp li.pass h4:after{content: '√'; background-color: #fff; color:#5cbb47;}
+	.tgcp li.pass h4{color:#fff;}
+	.tgcp li.pass .error_btn {right:100px;}
+	.tgcp li.pass .pass_btn {display: none;}
+	.tgcp li pre {display:block;background:#4A4A4A; padding:5px; color:#fff;}
+
+	.report_btn,.report_btn:hover {display:block; width:200px; height: 40px; line-height: 40px; text-align: center; line-height: 40px;background:#5cbb47; color:#fff; font-size:18px; font-weight: bold; border-radius: 4px; margin:0 auto;}
+	.report {width:600px; height:400px; margin:20px auto; background:#ffffcc; border:1px solid #ccc; border-radius: 4px; padding:30px; overflow: auto;}
+	.report h3 {font-size:16px; padding:3px 0;}
+	.report ul {padding:0 0 20px;}
+	.report li {font-size:12px; padding:3px 0;}
+	.report li.error {color:#f00;}
+	.report li.warning {color:#ff04fc;}
+	.report li.pass {color:#5cbb47;}
+
+	table {width: 800px; margin: 5px auto; background-color: #fff;border:1px solid #4A4A4A;}
+	table th {border:1px solid #4A4A4A; text-align: center;}
+	table td {border:1px solid #4A4A4A; padding:5px;}
+</style>
+
+</head>
+<body>
+<h1>重构规范检测对照表.v1</h1>
+<div class="tgcp" id="tgcp">
+	<h3>通用规范</h3>
+	<ul>
+		<li>
+			<h4>目录命名规范<em></em></h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+			<h5>专题目录命名:</h5>
+			<p>专题目录就是 a+日期+专题英文或拼音简写 (例如：a20090817avatar，统一使用小写字母)，文件名禁止以数字开头；</p>
+			<p>专题正式地址：https://游戏域名/cp/专题名/</p>
+			<h5>官网目录命名：</h5>
+			<p>PC官网目录就是 web+年月(例如：web201710，统一使用小写字母)，文件名禁止以数字开头；</p>
+			<p>移动端官网目录就是 m+年月(例如：m201710，统一使用小写字母)，文件名禁止以数字开头；</p>
+			<h5>微社区目录命名：</h5>
+			<p>专题目录就是 a+日期+专题英文或拼音简写+ig (例如：a20090817avatarig，统一使用小写字母)，文件名禁止以数字开头；</p>
+			<p>专题正式地址：https://游戏域名/ingame/act（不区分cp）/活动目录/</p>
+			</div>
+		</li>
+		<li>
+			<h4>文件命名规范</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>html首页、引导页命名为index.htm或index.shtml（不要用.html，页面使用了include时，扩展名用.shtml）;</p>
+				<p>html内页，有明显分类的，按英文或拼命首字母命名，无明确意义的，可用page01.htm、page02.htm</p>
+			</div>
+		</li>
+		<li>
+			<h4>文档编码</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			 <div>
+				<p>非特殊指定，统一使用gbk(&lt;meta charset=&quot;gbk&quot;&gt;)</p>
+			 </div>
+		</li>
+		<li>
+			<h4>HTML head信息</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>非特殊指定，按以下格式：</p>
+				<pre>&lt;meta name=&quot;author&quot; content=&quot;Tencent-CP&quot;&gt;
+&lt;meta name=&quot;Copyright&quot; content=&quot;Tencent&quot;&gt;
+&lt;meta name=&quot;Description&quot; content=&quot;根据官网首页填写&quot;&gt;
+&lt;meta name=&quot;Keywords&quot; content=&quot;根据官网首页填写&quot;&gt;
+&lt;title&gt;专题主题（标题）- 产品中文全称官方网站 - 腾讯游戏&lt;/title&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>标准版权信息</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<h5>通用foot</h5>
+				<p>body结速前插入以下代码：</p>
+				<pre>&lt;script  src=&quot;//game.gtimg.cn/images/js/2018foot/foot.js&quot;&gt;&lt;/script&gt;</pre>
+				<p>效果预览：</p>
+				<p><img src="//game.gtimg.cn/images/tgideas/cguide/foot/1.png" alt=""></p>
+				<p><img src="http://game.gtimg.cn/images/tgideas/cguide/foot/2.png" alt=""></p>
+				<h5>PC官网foot</h5>
+
+				<p>body结速前插入以下代码：</p>
+				<pre>
+&lt;div id=&quot;gfooter&quot; ams=&quot;AMS地址[必填，询问对应内部重构]&quot; age=&quot;年龄[询问对应内部重构或者产品]&quot; dark=&quot;1&quot; ieg-logo=&quot;1&quot;&gt;
+	<span style="color:#8e8282;">&lt;!-- &lt;div class=&quot;foot_top&quot;&gt; any HTML code &lt;/div&gt; --&gt;</span>
+	&lt;a target=&quot;_blank&quot; href=&quot;http://www.qq.com/&quot; title=&quot;logo1&quot; class=&quot;foot_left logo1&quot;&gt;logo1&lt;/a&gt;
+	&lt;a target=&quot;_blank&quot; href=&quot;http://www.qq.com/&quot; title=&quot;logo2&quot; class=&quot;foot_left logo2&quot;&gt;logo2&lt;/a&gt;
+	&lt;p class=&quot;copyright_txt&quot;&gt;COPYRIGHT &amp;©Smilegate Entertainment. All rights reserved.&lt;/p&gt;
+	<span style="color:#8e8282;">&lt;!-- &lt;div class=&quot;foot_bottom&quot;&gt; any HTML code &lt;/div&gt; --&gt;</span>
+&lt;/div&gt;
+&lt;script src=&quot;//game.gtimg.cn/images/js/2018foot/foot.js&quot;&gt;&lt;/script&gt;
+				</pre>
+				<p style="color:#f00;">注意不要直接复制使用，AMS和age的值需要找内部重构要，组件id "gfooter"不能更改</p>
+				<p>如果要不到AMS和age的值，可以到TGideas群里找亚美蝶协助</p>
+				<p>效果预览：</p>
+				<p><img src="http://game.gtimg.cn/images/tgideas/cguide/foot/3.png" alt="" width="800"></p>
+				<p>接口说明：</p>
+				<table>
+				<tbody>
+				<tr>
+				<th>div里属性名称</th>
+				<th>解释</th>
+				<th>备注</th>
+				</tr>
+				<tr>
+				<td>div属性id</td>
+				<td>组件依赖，不能改id="gfooter"</td>
+				<td>*PC官网必须；区别是否PC官网页面的标志</td>
+				</tr>
+				<tr>
+				<td>div属性ams</td>
+				<td>来自于ams资讯地址字段(下文重点介绍)</td>
+				<td>可选；如果没有版号，则可以不填</td>
+				</tr>
+				<tr>
+				<td>div属性dark</td>
+				<td>设置互娱LOGO图片适合深色背景</td>
+				<td>可选；默认0，LOGO图片适合浅色背景</td>
+				</tr>
+				<tr>
+				<td>div属性ieg-logo</td>
+				<td>设置是否显示互娱LOGO</td>
+				<td>可选；默认1，显示互娱logo</td>
+				</tr>
+				<tr>
+				<td>div属性age</td>
+				<td>游戏限制年龄文案</td>
+				<td>可选；默认不显示该行文案;填写0表示全年龄</td>
+				</tr>
+				<tr>
+				<td>div里的代码</td>
+				<td>有样式名foot_left的结构将会体现在页脚左边、互娱logo后插入</td>
+				<td>可选；可多行</td>
+				</tr>
+				<tr>
+				<td>div里的代码</td>
+				<td>有样式名foot_top的结构体将会现在页脚上面</td>
+				<td>可选；可多行</td>
+				</tr>
+				<tr>
+				<td>div里的代码</td>
+				<td>有样式名foot_bottom的结构体将会现在页脚上面</td>
+				<td>可选；可多行</td>
+				</tr>
+				<tr>
+				<td>div里的copyright_txt</td>
+				<td>有样式名copyright_txt体现合作公司的copyright</td>
+				<td>可选；可多行；建议为p标签</td>
+				</tr>
+				</tbody>
+				</table>
+				<p><a href="http://tgideas.qq.com/webplat/info/news_version3/804/25810/25811/25812/25814/m16274/201803/700317.shtml" target="_blank">查看详细说明</a></p>
+			</div>
+		</li>
+		<li>
+			<h4>统计代码</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<pre>&lt;script src=&quot;//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+//此段代码不能放到外链JS中，
+var setSite = { //设置网站属性
+	siteType: &quot;os&quot; || &quot;a20160711xxx&quot;, //必填项:&quot;os&quot;代表是官网，如果不是，则填写actName例如a20160701xxx
+	pageType: &quot;index&quot;, //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN
+	pageName: &quot;首页&quot;, //必填项:页面中文名
+	project:"" //选填项:如果是官网模块则是必填;按照模块内容，填写固定的对应值;<strong style="color:#FF0">原生官网base;微社区ingame;同人站doujin;赛事match;故事站story;文化站history;粉丝站fans;爆料站coming;论坛bbs;</strong>
+	osact: 0, //选填项:是否是官网专题(在官网运营的专题)boolean；默认是0；<strong style="color:#FF0">非微社区页面均是1</strong>；可以在链接上加入参数osact=1来灵活设置
+	ingame: 0, //选填项:是否投放在游戏APP内boolean；默认是0；可以在链接上加入参数ingame=1来灵活设置
+	stayTime: 0 //选填项:是否需要统计停留时长boolean；默认是0
+}
+if (typeof (pgvMain) == 'function') pgvMain();//千万不能忘记！
+&lt;/script&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>按钮点击统计</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>页面中，所有能点的按钮和链接都添加：</p>
+				<pre>onclick="PTTSendClick(
+		'header',//类型或所在区域
+		'btn_name',//按钮英文名
+		'按钮名'////按钮中文名
+		);"
+		//PC端用onclick，移动端用ontouchend事件
+		</pre>
+				<p>例如：</p>
+				<pre>&lt;a class=&quot;ios&quot; href=&quot;//itunes.apple.com/cn/app/id1232104244&quot; target=&quot;_blank&quot; onclick=&quot;PTTSendClick('header','ios_btn','苹果下载');&quot;&gt;&lt;/a&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>曝光埋点</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>用来统计官网的模块的曝光量和模块点击；<strong>官网一定要添加</strong></p>
+				<p>PC端和移动端用法一样； 在官网模块dom结构上添加exposure-tag="英文名,中文解释" 属性及值；</p>
+				<pre>&lt;div class="news" exposure-tag="英文名,中文解释">&lt;/div&gt;
+<!-- 例如： -->
+&lt;div class="news" exposure-tag="news,新闻"&gt;&lt;/div&gt;
+		</pre>
+				<p>官网曝光埋点案例： </p>
+				<img src="https://game.gtimg.cn/images/tgideas/doc/cntimg/gitbook/spec/common-datareport1.png" alt="">
+			</div>
+		</li>
+		<li>
+			<h4>图片质量</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>图片体积不能超过160K，图片格式包括.jpg/.gif/.png</p>
+				<p>jpg图片必须压缩，一般60%品质即可，如果图片质量不好，可提高到80%</p>
+				<p>透明PNG图片必须使用压缩工具压缩</p>
+			</div>
+		</li>
+		<li>
+			<h4>页面说明注释</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>在head区域中加上对页面相关人员注释：CP，创建的年-月-日，不能为其他内容。方便在产品环境中的查看，如：</p>
+				<pre>&lt;!-- 页面设计：世嘉 | 页面制作：世嘉 | 创建：2017-09-09 --&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>http、https协义兼容</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>分离前文件图片、CSS、JS引用的资源路径不要去掉http:，以便本地预览。</p>
+				<p>分离后的文件，<strong>除移动端分享组件里的图片链接外</strong>，去掉所有http:</p>
+			</div>
+		</li>
+		<li>
+			<h4>Include公用结构</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>多页面专题，子页超过2个以上，使用include提取页面相同元素，为了便于本地预览，请在图片分离后进行include，示例：</p>
+				<pre>&lt;!--#include file=&ldquo;/inc/文件名.inc&rdquo;--&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>页面默认字体</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>font-family中用到中文字体时，建议优先使用unicode码方式，英文别名方式为备选方案禁止使用中文方式</p>
+				<pre>font-family:'\5FAE\8F6F\96C5\9ED1';	/*推荐*/
+font-family:'Microsoft Yahei';	/*备选*/</pre>
+			</div>
+		</li>
+		<li>
+			<h4>禁止使用文件外链</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>禁止直接外链非qq.com域的文件，例如用到非腾讯提供的js库，必须下载到本地再调用</p>
+			</div>
+		</li>
+		<li>
+			<h4>视频播放</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>腾讯视频播放器v3不支持直播，需要直播的页面必须使用v2播放器</p>
+			</div>
+		</li>
+		<li>
+			<h4>特效视频文件接入</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>页面中使用到的特效视频文件（非使用腾讯播放器的视频），如果大于5M,必须把视频文件给内部人员上传到视频通道服务器,根据上传后提供的mediaURLData.js和视频id去获取视频地址输出到页面。<strong>获取到的视频链接是带防盗链的，mediaURLData.js里会定期更新，所以不能直接填写，必须通过请求json进行获取！</strong></p>
+				<p><strong style="font-weight:bold;">注：</strong>mediaURLData.js返回的是json数据，结构如下：</p>
+				<pre style="overflow: hidden;">
+{
+"视频id": "视频链接",
+"2578": "http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_51fd0634dd9e48dd8fffc8503490e3e5.f0.mp4?vkey=F68DBEB78AB2E0FD0AB7B7D62AA61FF906744F62357B3980B0CD1B31FA881F0E4ABECDC168210AFAB68F0A2CEDD5D07F2F84E652BAAF8468F12A359F739649C02C5C0C3D7F0B3F4095B09C662F225744EED41FBFBBD95AD6&sha=0",
+"2594": "http://videooc.tc.qq.com/vcloud1022.tc.qq.com/1022_84d673833db84b5bbb04daa06e0f3982.f0.mp4?vkey=0F648D380593DE6D32D30567FF614F19CD3BEB50D9AF29E1FB48F60ED7040C5686A0B1B0E421CAEC20B1EAE5C0122815BBE3366DA0D6E935AA01E3D17304F2015207C55AFE8CD6806FCEF6038910F050ED5924D54B28248E&sha=0"
+}
+				</pre>
+			</div>
+		</li>
+		<li>
+			<h4>页面可读性测试</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>在屏蔽js、css后，页面要仍然具有良好的可读性。</p>
+				<p>表现与结构分离，代码中不要涉及表现元素，如：style、font、bgColor、border等。</p>
+				<p>选用适当的元素，标题使用h1~h6，h1为网页一级标题，一个页面中只出现一次；</p>
+				<p>分大块使用div，段落使用p。数据列表使用table/ul/ol/dd等，关键字使用strong</p>
+			</div>
+		</li>
+		<li>
+			<h4>分离规范</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<h5>分离包目录</h5>
+				<p>如图：</p>
+				<p><img src="http://ossweb-img.qq.com/upload/webplat/info/tgideas/20170919/253581312537051.jpg" alt=""></p>
+				<p>压缩包以专题目录名命名，压缩成zip格式，如：<strong>a20171117act.zip</strong></p>
+				<h5>图片、css路径分离</h5>
+				<p>专题完成测试，经过确认后，进行图片分离；</p>
+				<p>分离目录中的ossweb-img文件夹，属于图片服务器game.gtimg.cn的，与网页文件不在同一服务器，故不能用相对路径，需要将路径修改为绝对路径：//game.gtimg.cn/images/<strong>游戏目录</strong>/cp/<strong>专题目录</strong>/</p>
+				<p>提供的分离前版本请补全图片、CSS、JS的http://协议，不然本地无法预览。</p>
+				<h5>如何获取分离路径？</h5>
+				<p>例如专题名是a20090817avatar，所属专题是天天象棋业务。</p>
+				<p>通过百度搜索官方域名，得到http://xiangqi.qq.com/开头的<strong>xiangqi</strong>就是项目名的简写</p>
+				<p><strong>官网活动</strong>需求需要将所有的css文件、JS文件、图片链接路径修改为绝对路径：//game.gtimg.cn/images/<strong>xiangqi</strong>/cp/<strong>a20150730avatar</strong>/，每次专题都只需要改动红色字体部分，项目名称以及专题名</p>
+				<p><strong style="font-weight: bold;">微社区需求，</strong>，将所有的css文件、JS文件、图片链接路径修改为绝对路径：//game.gtimg.cn/images/<strong>xiangqi</strong>/ingame/cp/<strong>a20150730avatar</strong>ig/，每次专题都只需要改动红色字体部分，项目名称以及专题名</p>
+				<p>如有用脚本操作图片造成跨域问题，图片路径可以把开头的game.gtimg.cn替换成ossweb-img.qq.com解决</p>
+			</div>
+		</li>
+	</ul>
+	<h3>PC端规范</h3>
+	<ul>
+		<li>
+			<h4>添加页面通用TOP</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>所有PC页面加截通用TOP条：</p>
+				<pre>&lt;script  src=&quot;//ossweb-img.qq.com/images/js/title.js&quot;&gt;&lt;/script&gt;</pre>
+				<p>然后给body写样式:</p>
+				<pre>body {
+	padding-top:42px;
+}</pre>
+			</div>
+		</li>
+		<li>
+			<h4>浏览器兼容性测试</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>兼容IE8、IE9、IE10、IE11、Firefox、chrome，QQ浏览器。并且拖大和缩小窗口，页面布局不会发生错位，<strong>浏览窗口大于1200px时不出现横向滚动条，小于1200px时不出现背景被截掉；</strong></p>
+				<p>页面不需要兼容IE6、7，页面中可以在顶部加入以下提示，注意页面中CSS类browser-tips需要写上样式，并使用醒目的背景和字体颜色</p>
+				<pre>&lt;!--[if lt IE 7]&gt;&lt;p class=&quot;browser-tips&quot;&gt;您的浏览器版本过低，请升级浏览器获得更好的体验&lt;p&gt;&lt;![endif]--&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>显示器分辨率兼容测试</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>兼容显示器1024*768、1440*900、1920*1080分辨率</p>
+			</div>
+		</li>
+		<li>
+			<h4>QQ聊天窗口分享规范</h4>
+			<a href="javascript:;" onclick="_error(this);" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>PC端QQ 客户端分享规范（预约、邀请类活动必加，相关信息请联系接口人）：</p>
+				<pre>&lt;meta itemprop="name" content="标题：必填 长度至少为4" /&gt;
+&lt;meta itemprop="description" content="摘要：必填 长度至少为10" /&gt;
+&lt;meta itemprop="image" content="图片地址不可为空，项目组无法提供的情况下，默认放游戏logo" /&gt;</pre>
+				<p>示例：</p>
+				<p><img src="http://ossweb-img.qq.com/upload/webplat/info/tgideas/20180424/5815971571191.png" alt=""></p>
+			</div>
+		</li>
+	</ul>
+	<h3>移动端规范</h3>
+	<ul>
+		<li>
+			<h4>分享组件添加</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>移动端HTML5页面分享组件TGMobileShareJS，内置微信分享、手Q分享，通过简单的调用即可设置分享信息。组件提供了初始化完成的回调方法和微信、手Q分享的回调方法（成功分享、取消分享共12个），同时已经在分享时接入了TCSS统计。</p>
+				<p>适用于分享内容固定 需要动态改变分享内容,多次调用TGMobileShare({...}); 分享内容以最后一次调用设置的为准</p>
+				<p style="color:#f00; font-weight: bold;">每个移动端专题的分享内容必须让产品同学跟项目组确认后添加，如果没有特别要求，则填写页面title和Description</p>
+				<pre>&lt;script src=&quot;//ossweb-img.qq.com/images/js/TGMobileShare/TGMobileShare.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script&gt;
+TGMobileShare({
+	shareTitle:'demo3分享标题', //不设置或设置为空时，页面有title，则调取title
+	shareDesc:'demo3分享详情', //不设置或设置为空时，页面有Description，则调取Description
+	shareImgUrl:'https://game.gtimg.cn/images/tgideas/act/a20151127tgmsdemo/share.jpg', //分享图片尺寸200*200，且填写绝对路径
+	shareLink:'', //分享链接要跟当前页面同域名(手Q分享有这个要求) ,不设置或设置为空时，默认调取当前URL
+	actName:'a20151127tgmsdemo' //点击流命名，用于统计分享量，专题一般采用目录名称如a20151029demo
+});
+&lt;/script&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>设置viewport</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<pre>&lt;meta&nbsp;name="viewport"&nbsp;content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"&gt;</pre>
+			</div>
+		</li>
+		<li>
+			<h4>定义的分享图片地址要写完整</h4>
+			<a href="javascript:;" class="error_btn">错误</a>
+			<a href="javascript:;" class="pass_btn">正确</a>
+			<a href="javascript:;" class="details_btn">查看说明</a>
+			<div>
+				<p>定义的分享图片地址要写完整，协议也要带上，微信客户端会拿这个地址去下载图片。如果直接写//开头的话，会拉不到分享图片。</p>
+				<p>game.gtimg.cn和ossweb-img.qq.com域名下的静态资源都支持https。分享图片地址直接写带https开头的。例如：
+https://game.gtimg.cn/images/tgideas/act/a20151127tgmsdemo/share.jpg</p>
+			</div>
+		</li>
+	</ul>
+</div>
+<a href="javascript:_report();" class="report_btn">查看检查报告</a>
+<div class="report" id="report">
+	<h3>通用规范</h3>
+	<ul>
+<!--        <li>文件命名规范-错误</li>
+			<li class="Warning">文件命名规范-未检查</li> -->
+	</ul>
+	<h3>PC端规范</h3>
+	<ul>
+			<!--<li>文件命名规范-错误</li>
+			<li class="Warning">文件命名规范-未检查</li> -->
+	</ul>
+	<h3>移动端规范</h3>
+	<ul>
+			<!-- <li>文件命名规范-错误</li>
+			<li class="Warning">文件命名规范-未检查</li> -->
+	</ul>
+</div>
+<script type="text/javascript">
+		var _btn=document.getElementById("tgcp").getElementsByTagName("a");
+		for(i=0;i<_btn.length;i++){
+				//console.log(_btn[i].className)
+				if(_btn[i].className=='error_btn'){
+						_btn[i].onclick=function(){//alert();
+								_error(this);
+						}
+				}
+				else if(_btn[i].className=='pass_btn'){
+						_btn[i].onclick=function(){
+								_pass(this);
+						}
+				}
+				else if(_btn[i].className=='details_btn'){
+						console.log(_btn[i].parentNode.getElementsByTagName("div")[0].offsetHeight);
+						if(_btn[i].parentNode.getElementsByTagName("div")[0].offsetHeight>0){
+								_btn[i].innerHTML='隐藏说明';
+						}
+						else{
+								_btn[i].innerHTML='查看说明'
+						}
+						_btn[i].onclick=function(){
+								_details(this);
+						}
+				}
+		}
+		var _error=function(obj){
+				obj.parentNode.className='error';
+		},
+		_pass=function(obj){
+				obj.parentNode.className='pass';
+		},
+		_details=function(obj){
+				if(obj.parentNode.getElementsByTagName("div")[0].offsetHeight>0){
+						obj.innerHTML='查看说明';
+						obj.parentNode.getElementsByTagName("div")[0].style.display='none';
+				}
+				else{
+						obj.innerHTML='隐藏说明';
+						obj.parentNode.getElementsByTagName("div")[0].style.display='block';
+				}
+		},
+		_report=function(){
+				var _ul=document.getElementById('tgcp').getElementsByTagName('ul'),_html=['','',''],_reportBox=document.getElementById('report').getElementsByTagName('ul')
+				for(i=0;i<_ul.length;i++){
+						for(j=0;j<_ul[i].getElementsByTagName('li').length;j++){
+								if(_ul[i].getElementsByTagName('li')[j].className==''){
+										_html[i]+='<li class="warning">'+_ul[i].getElementsByTagName('li')[j].getElementsByTagName('h4')[0].innerHTML+'-未检查</li>';
+								}
+								else if(_ul[i].getElementsByTagName('li')[j].className=='error'){
+										_html[i]+='<li class="error">'+_ul[i].getElementsByTagName('li')[j].getElementsByTagName('h4')[0].innerHTML+'-错误</li>';
+								}
+						}
+						if(_html[i]==''){
+							_html[i]+='<li>检查通过</li>'
+						}
+						_reportBox[i].innerHTML=_html[i];
+				}
+		};
+
+</script>
+</body>
+</html>

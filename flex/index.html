@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html,body{width: 100%;height: 100%;}
+        .main {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid red;
+        }
+
+        .topNav {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid blue;
+        }
+
+        .topNav li {
+            flex: auto;
+            font-size: .3rem;
+            color: #000;
+            text-align: center;
+            list-style: none;
+        }
+        .wrap{flex: auto;display: flex;border: 1px solid yellow;overflow: hidden;}
+        .slideNav{width: 200px;border: 1px solid green;}
+        .centent{flex:auto;border: 1px solid yellow;max-width: calc(100vw - 200px);overflow: auto;}
+        .centent img{border: 2px solid #000;}
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <ul class="topNav">
+            <li>top1</li>
+            <li>top1</li>
+            <li>top1</li>
+            <li>top1</li>
+            <li>top1</li>
+        </ul>
+        <div class="wrap">
+            <div class="slideNav"></div>
+            <div class="centent">
+                <img src="//game.gtimg.cn/images/jxqy/cp/a20200828data/vocation-swiper-nan.png" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

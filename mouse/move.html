@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{width: 700px;height: 300px;background: green;position: absolute;top: 11px;left: 11px;}
+    </style>
+</head>
+<body>
+<div class="box"  data-sum="-100"></div>
+<script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+<script>
+var pageMouse = (function(){
+    $('.box').each(function() {
+        $(this).data('left', parseInt($(this).css('left').match(/^-?\d*/)[0]));
+        $(this).data('top', parseInt($(this).css('top').match(/^-?\d*/)[0]));
+        console.log($(this).data())
+    });
+    document.onmousemove = function (event) {
+        var e = event || window.event;
+        var siteX = e.clientX;
+        var siteY = e.clientY;
+        $('.box').each(function() {
+            $(this).css("left", siteX/$(this).data("sum") + parseInt($(this).data('left')));
+            $(this).css("top", siteY/$(this).data("sum") + parseInt($(this).data('top')));
+        });
+    };
+})()
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+/* reset */
+html,body,div,p,ul,li,dl,dt,dd,em,i,span,a,img,input,h1,h2,h3,h4,h5 {margin:0;padding:0}
+a,img,input {border:none;}
+body{font: 14px/1.75 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+a {text-decoration:none;}
+ul,li{list-style: none}
+html{font-size:calc(100vw / 750 * 100);font-family:'Microsoft YaHei';}
+html,body{width: 100%;height: 100%;position: fixed;top:0;left: 0;}
+.fl {float: left;}
+.fr {float: right;}
+.clear {zoom:1;}
+.clear:after{content:"";display: block;height: 0;clear: both;}
+.bg{background: url(//game.gtimg.cn/images/xyj/m/web201810/bg.png) no-repeat;background-size: 7.5rem 10rem;}
+/*Ðý×ª*/
+@keyframes turn{
+  0%{-webkit-transform:rotate(0deg);}
+  25%{-webkit-transform:rotate(90deg);}
+  50%{-webkit-transform:rotate(180deg);}
+  75%{-webkit-transform:rotate(270deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}
+/*main*/
+.main{width: 100%;height: 100%;overflow-y:auto;}
+.video-box{height: 100vh;overflow: hidden;position: relative;}
+.load-icon{display: none;width: 1rem;height: 1rem;background: url(../ossweb-img/load-icon.png) no-repeat center / cover;position: absolute;top: 48%;left:0;right: 0;margin: -.15rem auto;z-index: 1;animation: turn 6s linear infinite;transform-origin: 50% 50%!important;}
+.play-btn{width: 1rem;height: 1rem;background:#fff url(../ossweb-img/play-btn.png) no-repeat center / 127%;position: absolute;top: 50%;left: 0;right: 0;margin: -.5rem auto 0;z-index: 11;border-radius: 50%;}
+.content-box{height: 37rem;background: yellow;}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>腾讯登录</title>
+    <style>
+        .pop-login{width: 100%;text-align: center;height: 300px;background: #999;line-height: 300px;display: none;}
+    </style>
+</head>
+<body>
+    <div>
+        <p class="un_login">
+            您好，请 <a href="javascript:clickShow('.pop-login')">【登录】</a>
+        </p>
+        <p class="login_ed" style="display: none;">
+            欢迎您，<span id="nick"></span>
+        </p>
+    </div>
+    <div class="pop-login">
+        <a href="javascript:loginQQ();">QQ登录</a>
+        <a href="javascript:loginWXM();">微信登录</a>
+    </div>
+
+<script src='//gzhcos.qq.com/components/slug-login/v1.0/index.js'></script>
+<script src="//gzhcache.qq.com/assets/js/dep/zepto.min.js"></script>
+<script src="//cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+<script>
+    var vConsole = new VConsole();
+
+
+
+
+    slugLogin.config({
+     game: 'smoba',
+     platform: {
+       qq: {
+         appid: '101482157', // 腾讯移动游戏
+       },
+       wxm: {
+         appid: 'wxa817069bb040f860', // 腾讯移动游戏
+       },
+       wxpc: {
+         appid: 'wxa17be3a499146f2f',
+       }
+     },
+   })
+   // 检查到微信或者手Q平台时自动登录
+   slugLogin.checkLogin().then((res) => {
+     if (!res.isLogin) {
+       slugLogin.login();
+     } else {
+       setCheckInfo(res)
+       getUserInfo()
+     }
+   })
+   function loginWXPC() {
+     slugLogin.login('wxpc');
+   }
+   function loginWXM() {
+     // 微信openinlink 例子 各游戏需自己申请
+     location.href = 'https://game.weixin.qq.com/cgi-bin/comm/openlink?noticeid=90241497&appid=wxc4c0253df149f02d&url=https%3A%2F%2Fgp.qq.com%2Fcp%2Fa20200325teamm%2Fm_index.html'
+   }
+   function loginQQ() {
+     // 打开手Q
+     location.href = 'mqqapi://forward/url?&version=1&src_type=web&url_prefix=' + window.btoa(window.location.href);
+     // 或 直接登录也可
+     slugLogin.checkLogin('qq').then((res) => {
+       if (!res.isLogin) {
+         slugLogin.login('qq');
+       } else {
+         setCheckInfo(res)
+         getUserInfo()
+       }
+     })
+   }
+   function logout() {
+     slugLogin.logout();
+     alert('登出成功');
+   }
+
+
+
+
+    //弹窗自动高度值
+    function AutoTop(){
+        var Pop_up=document.getElementsByClassName('pop-up')
+        for(var i=0;i<Pop_up.length;i++){
+            Pop_up[i].style.marginTop='-'+Pop_up[i].offsetHeight/2+'px';
+        }
+    }
+    //点击显示
+    function clickShow(obj){
+        $(obj).show();
+        $('.shade').show();
+        AutoTop()
+    }
+    //点击隐藏
+    function clickHide(obj){
+        $(obj).hide();
+        $('.shade').hide();
+    }
+</script>
+</body>
+</html>

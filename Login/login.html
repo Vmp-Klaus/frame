@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tencent-CP" />
+    <meta name="Copyright" content="Tencent" />
+    <!-- QQ分享 -->
+    <meta itemprop="name" content="《新剑侠情缘》龙雀出渊！">
+	<meta itemprop="description" content="《新剑侠情缘》手游2020春季资料片【龙雀出渊】今日开启！做任务赢豪礼，助战全新资料片~" />
+	<meta itemprop="image" content="//game.gtimg.cn/images/jxqy/logo.png">
+    <meta name="Keywords" content="新剑侠情缘手游,剑侠手游,剑侠情缘移动版,剑侠移动版,剑侠情缘手机版,剑侠手机版,剑侠情缘,剑网手游,剑侠情缘网络版，武侠手游"/>
+	<meta name="Description" content="国民情缘手游《新剑侠情缘》2019 夏季资料片「墨问江湖」今日开启，全新门派万花风雅而至，丐帮少女火热登场！八军对阵决胜长白，公平多阵营玩法鹿死谁手；强袭龙门勇夺至宝，家族夺标战场精英针锋相对！池中嬉戏鹦鹉传情，焕新自定义家具温柔时光；执手共舞风华绝代，首套双人互动外装浪漫无限。">
+    <title>江湖侠缘-新剑侠情缘-腾讯游戏</title>
+    <style>
+        .pop-login{width: 100%;text-align: center;height: 300px;background: #999;line-height: 300px;display: none;}
+    </style>
+</head>
+<body>
+    <div>
+        <p class="un_login">
+            您好，请 <a href="javascript:clickShow('.pop-login')">【登录】</a>
+        </p>
+        <p class="login_ed" style="display: none;">
+            欢迎您，<span id="nick"></span>
+        </p>
+        <a href="javascript:logout();">退出</a>
+    </div>
+    <div id="user"></div>
+    <div class="pop-login">
+        <a href="javascript:loginQQ();">QQ登录</a>
+        <a href="javascript:loginWXPC();">微信登录</a>
+    </div>
+
+<script src='//gzhcos.qq.com/components/slug-login/v1.0/index.js'></script>
+<script src="//gzhcache.qq.com/assets/js/dep/zepto.min.js"></script>
+<script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+<script src="//cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+<script>
+    //此段代码不能放到外链JS中，
+    var setSite = { //设置网站属性
+        siteType:"a20200717jhxy", //必填项:"os"代表是官网，如果不是，则填写actName例如a20160701xxx
+        pageType: "index", //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN
+        pageName: "首页", //必填项:页面中文名
+        project:"base", //选填项:如果是官网模块则是必填;按照模块内容，填写固定的对应值;原生官网base;微社区ingame;同人站doujin;赛事match;故事站story;文化站history;粉丝站fans;爆料站coming;论坛bbs;
+        osact: 'pc', //选填项:是否是官网专题(在官网运营的专题)boolean；默认是0；非微社区页面均是1；可以在链接上加入参数osact=1来灵活设置
+        ingame: 0, //选填项:是否投放在游戏APP内boolean；默认是0；可以在链接上加入参数ingame=1来灵活设置
+        stayTime: 0 //选填项:是否需要统计停留时长boolean；默认是0
+    }
+    if (typeof (pgvMain) == 'function') pgvMain();//千万不能忘记！
+    //PTTSendClick('类型或所在区域','按钮英文名','按钮中文名')
+    var vConsole = new VConsole();
+
+slugLogin.config({
+    game: 'smoba',
+    platform: {
+        qq: {
+            appid: '101482157', // 腾讯移动游戏
+        },
+        wxm: {
+            appid: 'wxa817069bb040f860', // 腾讯移动游戏
+        },
+        wxpc: {
+            appid: 'wxa17be3a499146f2f',
+        }
+    },
+})
+// 检查到微信或者手Q平台时自动登录
+slugLogin.checkLogin().then((res) => {
+    console.log('检测自动登录')
+    if (!res.isLogin) {
+        console.log('没有登录 拉起登录')
+        slugLogin.login();
+    } else {
+        console.log('有登录获取用户信息')
+        getUserInfo()
+    }
+})
+function loginWXPC() {
+    console.log('点击微信登录 拉起PC微信登录')
+    slugLogin.login('wxpc');
+}
+function loginQQ() {
+    console.log('点击QQ登陆 拉起QQ登录')
+    slugLogin.checkLogin('qq').then((res) => {
+        if (!res.isLogin) {
+            slugLogin.login('qq');
+        } else {
+            getUserInfo(res)
+        }
+    })
+}
+function logout() {
+    console.log('退出成功')
+    slugLogin.logout();
+}
+function getUserInfo(platform) {
+    slugLogin.getUserInfo(platform).then((res) => {
+    console.log('获取用户信息',res)
+    $('#user').html(res.nickname);
+ })
+}
+
+    //弹窗自动高度值
+    function AutoTop(){
+        var Pop_up=document.getElementsByClassName('pop-up')
+        for(var i=0;i<Pop_up.length;i++){
+            Pop_up[i].style.marginTop='-'+Pop_up[i].offsetHeight/2+'px';
+        }
+    }
+    //点击显示
+    function clickShow(obj){
+        $(obj).show();
+        $('.shade').show();
+        AutoTop()
+    }
+    //点击隐藏
+    function clickHide(obj){
+        $(obj).hide();
+        $('.shade').hide();
+    }
+</script>
+</body>
+</html>

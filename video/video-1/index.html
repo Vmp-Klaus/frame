@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- 为了防止页面数字被识别为电话号码，可根据实际需要添加： -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 让添加到主屏幕的网页再次打开时全屏展示，可添加：   -->
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tencent-CP" />
+    <meta name="Copyright" content="Tencent" />
+    <meta name="Description" content="页面的描述内容" />
+    <meta name="Keywords" content="页面关键字" />
+    <title>专题主题（标题）- 产品中文全称官方网站 - 腾讯游戏</title>
+    <!-- 页面设计：cp | 页面制作：cp | 创建：2020-05-20 -->
+    <link rel="stylesheet" href="//ossweb-img.qq.com/images/js/swiper/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            // window.location.href = "PC端专题地址"+location.search;
+        }
+    </script>
+</head>
+<body>
+        <div class="main">
+            <div class="pox">
+                <div view-mode="v" view-rotation="auto" view-scale="noborder" view-width="800" view-height="1024" view-align="">
+                    <div style="position: absolute;">
+                        <video id="video" style="display:none;"></video>
+                    </div>
+                    <div id="loading" class="compatibleStyle" style="position: absolute;">
+                        <img src="ossweb-img/1.jpg">
+                    </div>
+                    <div id="end" class="compatibleStyle" style="position: absolute;display: none;">
+                        <img src="ossweb-img/1-1.jpg">
+                    </div>
+                    <button id="startPlay" class="compatibleStyle" style="position: absolute; width: 130px; height: 60px; background-color: rgb(255, 255, 255); display: none; bottom: 10%; left: 335px;">需要交互才能播放,点我播放视频</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <a href="//game.gtimg.cn/images/game/act/a20160917fbh/videos/video2.mp4" download="视频1">视频1</a>
+            </div>
+        </div>
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.modules.min.js"></script>
+    <script  src="//game.gtimg.cn/images/js/2018foot/foot.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/TGMobileShare/TGMobileShare.min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/swiper/swiper-3.4.2.min.js"></script>
+    <script src="//game.gtimg.cn/images/js/mmdPlugin/mmd-plugin.min.1.0.2.js" charset="utf-8"></script>
+    <script src="//game.gtimg.cn/images/js/mmdVideoPlayer/mmd.videoplayer.min.1.0.1.js" charset="utf-8"></script>
+    <script src="js/common.js"></script>
+    <script>
+
+        var EventUtil = {
+            addHandler: function (element, type, handler) {
+                if (element.addEventListener)
+                    element.addEventListener(type, handler, false);
+                else if (element.attachEvent) element.attachEvent("on" + type, handler);
+                else element["on" + type] = handler;
+            },
+            removeHandler: function (element, type, handler) {
+                if (element.removeEventListener)
+                    element.removeEventListener(type, handler, false);
+                else if (element.detachEvent) element.detachEvent("on" + type, handler);
+                else element["on" + type] = handler;
+            },
+            /**
+             * @param target 要绑定监听的目标元素
+             * @param isPreventDefault 是否屏蔽掉触摸滑动的默认行为（例如页面的上下滚动，缩放等）
+             * @param upCallback 向上滑动的监听回调（若不关心，可以不传，或传false）
+             * @param rightCallback 向右滑动的监听回调（若不关心，可以不传，或传false）
+             * @param downCallback 向下滑动的监听回调（若不关心，可以不传，或传false）
+             * @param leftCallback 向左滑动的监听回调（若不关心，可以不传，或传false）*/
+            listenTouchDirection: function (target, isPreventDefault, upCallback, rightCallback, downCallback, leftCallback) {
+                this.addHandler(target, "touchstart", handleTouchEvent);
+                this.addHandler(target, "touchend", handleTouchEvent);
+                this.addHandler(target, "touchmove", handleTouchEvent);
+                var startX;
+                var startY;
+
+                function handleTouchEvent(event) {
+                    switch (event.type) {
+                        case "touchstart":
+                            startX = event.touches[0].pageX;
+                            startY = event.touches[0].pageY;
+                            break;
+                        case "touchend":
+                            var spanX = event.changedTouches[0].pageX - startX;
+                            var spanY = event.changedTouches[0].pageY - startY;
+                            if (Math.abs(spanX) > Math.abs(spanY)) { //认定为水平方向滑动
+                                if (spanX > 30) { //向右
+                                    if (rightCallback) {
+                                        rightCallback();
+                                        console.log("right");
+                                    }
+
+                                } else if (spanX < -30) { //向左
+                                    if (leftCallback) {
+                                        leftCallback();
+                                        console.log("left");
+                                    }
+                                }
+                            }
+                            // else { //认定为垂直方向滑动
+                            //     if (spanY > 30) { //向下
+                            //         if (downCallback) {
+                            //             downCallback();
+                            //             // console.log("down");
+                            //         }
+                            //     } else if (spanY < -30) {//向上
+                            //         if (upCallback) {
+                            //             upCallback();
+                            //             // console.log("up");
+                            //         }
+                            //     }
+                            // }
+                            break;
+                            case "touchmove": //阻止默认行为
+                            if (isPreventDefault) event.preventDefault();
+                            break;
+                        }
+                    }
+            }
+        };
+        //使用的时候很简单，只需要向下面这样调用即可
+        // 其中下面监听的是整个DOM
+        // up, right, down, left为四个回调函数，分别处理上下左右的滑动事件
+        EventUtil.listenTouchDirection(document.querySelector('.pox'), false,
+            //向上
+            function(){
+                return
+            },
+            //向右
+            function(){
+                //先暂停视频
+                // videoPlayer.pause()
+                //当前第几个--
+                active --;
+                //更新视频连接
+                videoPlayer.src = data[active].src;
+                //更换loading图片
+                $('#loading img').attr('src',''+data[active].loadingImg+'')
+                //更换end图片
+                $('#end img').attr('src',''+data[active].loadingImg+'')
+                //播放视频
+                videoPlayer.play()
+                //打印数据
+                console.log(active,data[active].src,videoPlayer.src)
+            },
+            //向下
+            function(){
+                return
+            },
+            //向左
+            function(){
+                //先暂停视频
+                // videoPlayer.pause()
+                //当前第几个--
+                active ++;
+                //更新视频连接
+                videoPlayer.src = data[active].src;
+                //更换loading图片
+                $('#loading img').attr('src',''+data[active].loadingImg+'')
+                //更换end图片
+                $('#end img').attr('src',''+data[active].loadingImg+'')
+                //播放视频
+                videoPlayer.play()
+                //打印数据
+                console.log(active,data[active].src,videoPlayer.src)
+
+        });
+    </script>
+</body>
+</html>

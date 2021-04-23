@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- 为了防止页面数字被识别为电话号码，可根据实际需要添加： -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 让添加到主屏幕的网页再次打开时全屏展示，可添加：   -->
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="robots" content="all">
+    <meta name="author" content="Tencent-CP" />
+    <meta name="Copyright" content="Tencent" />
+    <meta name="Description" content="页面的描述内容" />
+    <meta name="Keywords" content="页面关键字" />
+    <title>专题主题（标题）- 产品中文全称官方网站 - 腾讯游戏</title>
+    <!-- 页面设计：cp | 页面制作：cp | 创建：2020-05-20 -->
+    <link rel="stylesheet" href="css/videojs.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script>
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            // window.location.href = "PC端专题地址"+location.search;
+        }
+    </script>
+</head>
+<body>
+    <section class="wrap">
+        <div class="video">
+            <video
+                id="video"
+                webkit-playsinline="true"
+                playsinline="true"
+                preload="auto"
+                autoplay=""
+                class="video-js vjs-default-skin"
+                poster="ossweb-img/1.jpg">
+                   <source src="ossweb-img/video1.mp4" type="video/mp4">
+             </video>
+             <a href="javascript:;" class="loading">loading</a>
+             <a href="javascript:;" class="play-btn">播放</a>
+        </div>
+        <div class="content">
+
+        </div>
+    </section>
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.modules.min.js"></script>
+    <script src='//vm.gtimg.cn/tencentvideo/txp/js/txplayer.js'></script>
+    <script src="js/vconsole.min.js"></script>
+    <script src="js/videojs.js"></script>
+    <script src="js/swiper.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+    //调试
+    var vConsole = new VConsole();
+    //video
+    var active = 0;
+    var state = false;
+    var data=[
+        {
+            src:'//cdn-1251905895.cos.ap-beijing-1.myqcloud.com/jxqy/video/a20200520xxxm/ossweb-img/video-1.mp4',
+            img:'//cdn-1251905895.cos.ap-beijing-1.myqcloud.com/jxqy/video/a20200520xxxm/ossweb-img/1.jpg'
+        },
+        {
+            src:'//cdn-1251905895.cos.ap-beijing-1.myqcloud.com/jxqy/video/a20200520xxxm/ossweb-img/video-2.mp4',
+            img:'//cdn-1251905895.cos.ap-beijing-1.myqcloud.com/jxqy/video/a20200520xxxm/ossweb-img/2.jpg'
+        }
+    ]
+    $('.video').css('height',screen.width * 1.6)
+    var oVideo = document.getElementById("video");
+    var player = videojs('video',{
+        // controls:true,
+        muted: false,
+        height:300,
+        width:300,
+        loop : true,
+        autoplay:true,
+        preload:'auto',
+        // 更多配置.....
+    },function(){
+        var that = this;
+        playVideo(that)
+        this.on("play", function(){
+    		console.log("视频开始播放 改变状态值 执行播放 移除play监听")
+            state = true;
+            playVideo(player)
+            that.off('play');
+        });
+    });
+    //点击播放
+    $('.play-btn').on('click',function(){
+        console.log('按钮点击播放了 执行播放 隐藏按钮')
+        playVideo(player)
+        $(this).hide()
+    })
+    function playVideo(that){
+        console.log('开始播放视频 显示加载icon 替换视频连接以及图片 判断是否能自动播放 判断加载状态')
+        $('.loading').show()
+        that.src(data[active].src)
+        that.poster(data[active].img)
+        autoPlay(that)
+    }
+    //判断播放状态
+    function autoPlay(that){
+        console.log('判断播放状态',state)
+        if(state){
+            console.log('可以播放执行')
+            $('.play-btn').hide()
+            that.on('timeupdate',function(){
+                if(that.currentTime() > 0){
+                    console.log('正在播放 移除事件 隐藏icon')
+                    $('.loading').hide()
+                    that.off('timeupdate');
+                }else{
+                    console.log('正在加载 显示icon')
+                }
+            })
+        }else{
+            console.log('不能播放执行')
+            $('.loading').hide()
+            $('.play-btn').show()
+        }
+    }
+    //滑动切换视频
+    EventUtil.listenTouchDirection(document.querySelector('.video'), false,
+        //向上
+        function(){
+            return
+        },
+        //向右
+        function(){
+            if(active > 0){
+                active --;
+            }else{
+                active = data.length -1;
+            }
+            //切换视频
+            playVideo(player)
+        },
+        //向下
+        function(){
+            return
+        },
+        //向左
+        function(){
+            if(active < data.length-1){
+                active ++;
+            }else{
+                active = 0;
+            }
+            //切换视频
+            playVideo(player)
+    });
+    document.addEventListener("WeixinJSBridgeReady",function(){
+        player.play()
+    },false);
+
+    </script>
+</body>
+</html>

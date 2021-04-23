@@ -1,0 +1,19 @@
+/* reset */
+html,body,div,p,ul,li,dl,dt,dd,em,i,span,a,img,input,h1,h2,h3,h4,h5 {margin:0;padding:0}
+a,img,input {border:none;}
+body{font: 14px/1.75 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;}
+a {text-decoration:none;}
+ul,li{list-style: none}
+html{font-size:calc(100vw / 750 * 100);font-family:'Microsoft YaHei';}
+.fl {float: left;}
+.fr {float: right;}
+.clear {zoom:1;}
+.clear:after{content:"";display: block;height: 0;clear: both;}
+.bg{background: url(//game.gtimg.cn/images/xyj/m/web201810/bg.png) no-repeat;background-size: 7.5rem 10rem;}
+html,body{position: fixed;width: 100%;height: 100%;overflow: hidden;}
+/*wrap*/
+.wrap{width: 100%;height: 100%;background: yellow;overflow-y: auto;}
+.video-box{height: 100vh;background: #666;position: relative;}
+.box{height: 30rem;background: #eee;}
+#container{width: 100%;height: 100%;}
+.txp_watermark,.txp_bottom{display: none!important;}

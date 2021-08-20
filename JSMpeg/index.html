@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0;}
+    </style>
+</head>
+<body>
+    <canvas id="video" style="width:100%"></canvas>
+    <audio src="audio.mp3" controls></audio>
+    <script src="jsmpeg.min.js"></script>
+    <script>
+        var audio = document.querySelector('audio');
+        var player = new JSMpeg.Player('video.ts', {
+            canvas: document.getElementById('video'),//用于视频渲染的 HTML Canvas 元素 如果没有给出，渲染器将创建自己的 Canvas 元素
+            loop:true,//是否循环播放视频
+            autoplay:true,//是否立即开始播放
+            audio: true,//是否解码音频 默认true
+            decodeFirstFrame: true,//是否解码并显示视频的第一帧 使用autoplay或流式传输源时无效 默认true
+            disableWebAssembly: false,//是否禁用 WebAssembly 并始终使用 JavaScript 解码器 默认false
+            throttled: false, //是否在不需要播放时推迟加载块 默认true
+            chunkSize: 1024 * 1024,//一次加载的块大小 默认1024*1024
+            disableGl: true,//是否禁用 WebGL 并始终使用 Canvas2D 渲染器 默认false
+        });
+function onUnlocked () {
+    player.volume = 1
+    document.removeEventListener('touchstart', onTouchStart)
+}
+function onTouchStart () {
+    player.audioOut.unlock(onUnlocked)
+    document.removeEventListener('touchstart', onTouchStart)
+}
+
+// try to unlock immediately
+player.audioOut.unlock(onUnlocked)
+
+// try to unlock by touchstart event
+document.addEventListener('touchstart', onTouchStart, false)
+</script>
+</body>
+</html>

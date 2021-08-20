@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>序列帧</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .img{width: 1334px;height: 750px;background: url(ossweb-img/102.png) no-repeat 0 0 / 1334px 22500px;}
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1334" height="750"></canvas>
+    <script src="//ossweb-img.qq.com/images/js/zepto/zepto.modules.min.js"></script>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        let i = 0;
+
+        const image = new Image();
+        image.src = "ossweb-img/bzgbs-x.png";
+        image.onload = function () {
+            setInterval(() => {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(image, 1334 * i, 0, 1334, 750, 0, 0, canvas.width, canvas.height);
+                if (i === 56) {
+                    i = 0;
+                }
+                i++;
+            }, 80)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        html{
+            font-size: calc(100vw / 750 * 100);
+        }
+        #canvaVideo{height:13.34rem;}
+        .box{height: 13.34rem;background: yellow;opacity: .3;position: absolute;top: 0;left: 0;right: 0;}
+    </style>
+</head>
+<body>
+    <div id="canvaVideo">
+    </div>
+    <div class="box">
+
+    </div>
+    <script>
+        function canvasVideo(el,src,controls,loop,click){
+            // 获取元素
+            var el = document.querySelector(el),
+                click = document.querySelector(click),
+                width = el.offsetWidth,
+                height = el.offsetHeight,
+                // 创建 video canvas 标签
+                v = document.createElement('video'),
+                c = document.createElement('canvas');
+            // 添加 video canvas
+            el.appendChild(v);
+            el.appendChild(c);
+            // 获取 video canvas 和 canvas的画布
+            var video = el.querySelector('video'),
+                canvas = el.querySelector('canvas'),
+                ctx = canvas.getContext('2d');
+            // 设置 video canvas 的宽高
+            video.width = width * 1 ;
+            video.height = height * 1;
+            canvas.width = width;
+            canvas.height = height;
+            canvas.style.cssText = 'position:absolute;top:0;left:0;';
+            // 设置 video 的基本属性
+            video.src = src;
+            video.loop = loop;
+            video.controls = controls;
+            video.setAttribute('x-webkit-airplay','true')
+            video.setAttribute('x5-video-player-type','h5-page')
+            video.setAttribute('playsinline','true')
+            video.setAttribute('webkit-playsinline','true')
+            // x-webkit-airplay="true" x5-playsinline="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5-page"
+            // 监听视频加载 绘制第一帧
+            video.addEventListener('canplay',function(){
+                setTimeout(function(){
+                    ctx.drawImage(video,0,0,canvas.width,canvas.height);
+                    video.style.cssText = 'display:none;position:fixed;top:-999rem;left:-999rem;';
+                },1000)
+            })
+            // 监听video播放 在canvas上绘制视频帧
+            video.addEventListener('play',function(){
+                var time = setInterval(function(){
+                    ctx.drawImage(video,0,0,canvas.width,canvas.height)
+                    //视频暂停 清除定时器
+                    if(video.paused){
+                        clearInterval(time)
+                    }
+                },30)
+            })
+            // 监听 canvas 的点击暂停、播放视频
+            click.addEventListener('click',function(){
+                if(video.paused){
+                    video.play()
+                }else{
+                    video.pause()
+                }
+            })
+
+
+        }
+        canvasVideo('#canvaVideo','video.mp4',false,true,'.box')
+    </script>
+</body>
+</html>

@@ -42,7 +42,7 @@
         $(obj).each(function(){
             var ot = parseInt($(this).offset().top);//元素距离顶部的距离
             var oh = parseInt($(this).height());
-            console.log('wh:'+wh,'wt:'+parseInt(wt),'ot:'+ot,'oh:'+parseInt(oh))
+            // console.log('wh:'+wh,'wt:'+parseInt(wt),'ot:'+ot,'oh:'+parseInt(oh))
             switch (true) {
                 case wt > ot + oh:
                     // console.log('元素顶部消失')

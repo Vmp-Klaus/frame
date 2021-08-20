@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        #video{width:375px;height:667px;}
+    </style>
+</head>
+<body>
+    <!--
+        x-webkit-airplay="true"
+        x5-playsinline="true"
+        webkit-playsinline="true"
+        playsinline="true"
+        x5-video-player-type="h5-page"
+     -->
+    <video id="video" src="video.mp4" controls loop webkit-playsinline="true"></video>
+    <!-- <canvas id="canvas"></canvas> -->
+    <script>
+        // var video = document.querySelector('#video'),
+        //     canvas = document.querySelector('#canvas'),
+        //     ctx = canvas.getContext('2d');
+        //     console.log(video.offsetWidth)
+        //     canvas.width = video.offsetWidth;
+        //     canvas.height = video.offsetHeight;
+        // video.addEventListener('play',function(){
+        //     var time = setInterval(function(){
+        //         ctx.drawImage(video,0,0,canvas.width,canvas.height)
+        //         if(video.ended){
+        //             clearInterval(time)
+        //         }
+        //     },30)
+        // })
+        // console.log(video,canvas,ctx)
+    </script>
+</body>
+</html>

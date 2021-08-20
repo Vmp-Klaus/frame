@@ -15,68 +15,57 @@
     <script src="//cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
     <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
     <script>
-        // var vConsole = new VConsole();
-        function audio(id){
-            var curent = false;//切换播放判断条件
-            var touch = true;//触摸播放判断条件
-            //获取播放对象
-            var music = document.getElementById(id)
-            function monitor(){
-                if(!music.paused){
-                    $('.play').addClass('playing')
-                }else{
-                    $('.play').removeClass('playing')
-                }
-                //监听播放/暂停
-                music.addEventListener('playing', function () {
-                   $('.play').addClass('playing')
-                }, false);
-                music.addEventListener('pause', function () {
-                   $('.play').removeClass('playing')
-                }, false);
+    function audio(id,element,klass){
+        // getAudio
+        var music = document.getElementById(id)
+        var touch = true;
+        var curent = true;
+
+        // listenerPlay
+        music.addEventListener('playing', function () {
+           $(element).addClass(klass)
+           touch = false;
+        }, false);
+
+        // listenerPause
+        music.addEventListener('pause', function () {
+           $(element).removeClass(klass)
+        }, false);
+
+        // weixinPlay
+        document.addEventListener("WeixinJSBridgeReady",function(){
+            music.play();
+        },false);
+
+        // clickPlayPause
+        $(element).bind('click',function(){
+            if(music.paused){
+                music.play()
+            }else{
+                music.pause();
             }
-            function canPlay(){
-                music.canplaythrough = through()
-                function through(){
-                    //监听加载执行播放~
-                    music.play()
+            curent = !curent;
+        })
+
+        // touchPlay
+        document.addEventListener('touchstart', function(){
+            if(touch){
+                music.play();
+            }
+        }, false);
+
+        // togglePlayPause
+        document.addEventListener('visibilitychange', function() {
+            if(document.hidden){
+                music.pause();
+            }else{
+                if(curent){
+                    music.play();
                 }
             }
-            document.addEventListener("WeixinJSBridgeReady",function(){
-                canPlay() //微信下执行播放
-            },false);
-            //点击播放/暂停
-            $('.play').click(function(){
-                touch = false;
-                curent = false;
-                if(music.paused){
-                    music.play();
-                }else{
-                    music.pause();
-                }
-                event.stopPropagation();
-            })
-            //触摸播放
-            document.addEventListener('touchstart', function(){
-                if(touch){
-                    music.play();
-                }
-            }, false);
-            //切换环境 播放/暂停
-            document.addEventListener('visibilitychange', function() {
-                if(!music.paused || curent){
-                    if(document.hidden && !music.paused) {
-                        music.pause();
-                        curent = true;
-                    } else if (music.paused) {
-                        music.play();
-                    }
-                }
-            })
-            canPlay()
-            monitor()
-        }
-        audio('audio')
+        })
+    }
+    audio('audio','.play','playing')
     </script>
 </body>
 

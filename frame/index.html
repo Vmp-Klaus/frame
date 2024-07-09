@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="gbk">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>frame</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .frame,.frame2{width: 800px;height: 1024px;border: 1px solid green;}
+        canvas{width: 100%;height: 100%;}
+    </style>
+</head>
+<body>
+    <div class="frame"></div>
+</body>
+<script src="frame.js"></script>
+<script>
+    frame({name:'frame',length:10,speed:100,src:'images/',type:'jpg',auto:false,loop:false,callback(){
+        alert(1)
+    }})
+</script>
+</html>

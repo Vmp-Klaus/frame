@@ -148,3 +148,28 @@
         }
     }
 })(this || window);
+
+/*
+    frame(config)
+    config{
+        name:容器
+        length:素材数量
+        speed:播放速度
+        src:路径
+        type:格式
+        auto:自动播放
+        loop:循环播放
+        callback() 不循环播放下 结束后的回调
+    }
+        
+    frameData 页面上已有的 帧动画
+
+    framePlay() 播放页面上所有的
+    framePlay(name) 播放一个
+    framePlay([name,name]) 播放多个
+
+    framePause() 暂停页面上所有的
+    framePause(name) 暂停一个
+    framePause([name,name]) 暂停多个
+
+ */

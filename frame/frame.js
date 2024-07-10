@@ -1,13 +1,150 @@
-/**
- * 
- * 
-frame({name:'frame',length:10,speed:100,src:'ossweb-img/frame/',type:'png',auto:true,loop:false,callback(){
-    alert(1)
-}})
-    名称 图片数量 播放速度 路径 图片格式 是否自动播放 是否循环 播放结束后执行
-framePlay(['frame'])
-    播放素组里面的名称，暂停其它的
-framePause('frame)
-    暂停传入的
- */
-    !function(t){"use strict";var a=function(t){return new a.prototype.init(t)};a.prototype={init:function(t){this.config=t,this.count=0,this.images=[],this.index=0,this.time=null,this.canvas=null,this.ctx=null,this.create(),frameData.push(this)},create:function(){this.canvas=document.createElement("canvas"),this.ctx=this.canvas.getContext("2d"),this.canvas.width=document.querySelector("."+this.config.name).clientWidth,this.canvas.height=document.querySelector("."+this.config.name).clientHeight,document.querySelector("."+this.config.name).appendChild(this.canvas),this.laoding()},laoding:function(){var t=this;if(this.count<this.config.length){var a=new Image;a.src=this.config.src+this.count+"."+this.config.type,0==this.count&&(a.onload=function(){t.render()}),this.images.push(a),this.count++,this.laoding()}else this.updata()},render:function(){this.images[this.index].complete?this.images[this.index].width&&(this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height),this.ctx.drawImage(this.images[this.index],0,0,this.canvas.width,this.canvas.height,0,0,this.canvas.width,this.canvas.height)):this.index>2&&(this.index-=2)},updata:function(){var t=this;t.config.auto?(clearInterval(t.time),t.time=setInterval(function(){t.index<t.config.length-1?t.index++:t.config.loop?t.index=0:(t.config.auto=!1,t.updata(),t.config.callback&&t.config.callback()),t.render()},t.config.speed)):clearInterval(t.time)}},a.prototype.init.prototype=a.prototype,t.frame=a,t.frameData=[],t.framePlay=function(a){for(var i=0;i<t.frameData.length;i++)for(var e=0;e<a.length;e++)t.frameData[i].config.name==a[e]?(t.frameData[i].config.auto=!0,t.frameData[i].updata()):(t.frameData[i].config.auto=!1,t.frameData[i].updata())},t.framePause=function(a){for(var i=0;i<t.frameData.length;i++)t.frameData[i].config.name==a&&(t.frameData[i].config.auto=!1,t.frameData[i].updata())}}(this||window);
+; (function (global) {
+    "use strict";
+
+    var frame = function (config) {
+        return new frame.prototype.init(config)
+    };
+    frame.prototype = {
+        init: function (config) {
+            this.config = config; // 包含 容器 图片数量 播放速度 路径 图片格式 自动播放
+            this.count = 0; // 加载计数器
+            this.images = []; // 图片数组
+            this.index = 0; // 帧计数器
+            this.time = null; // 定时器
+            this.canvas = null; // canvas
+            this.ctx = null; // 画布
+            this.create()
+            frameData.push(this)
+        },
+        create: function () {
+            this.canvas = document.createElement("canvas");
+            this.ctx = this.canvas.getContext('2d');
+            this.canvas.width = document.querySelector('.' + this.config.name + '').clientWidth;
+            this.canvas.height = document.querySelector('.' + this.config.name + '').clientHeight;
+            document.querySelector('.' + this.config.name + '').appendChild(this.canvas)
+            this.laoding()
+        },
+        laoding: function () {
+            var that = this;
+            if (this.count < this.config.length) {
+                var img = new Image();
+                img.src = this.config.src + this.count + '.' + this.config.type + '';
+                this.count == 0 ?
+                    img.onload = function(){
+                        that.render()
+                    }
+                    :
+                    ''
+                this.images.push(img)
+                this.count++
+                this.laoding()
+            } else {
+                this.updata()
+            }
+        },
+        render: function () {
+            this.images[this.index].complete ?
+                this.images[this.index].width ?
+                    (
+                        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height),
+                        this.ctx.drawImage(this.images[this.index], 0, 0, this.canvas.width, this.canvas.height, 0, 0, this.canvas.width, this.canvas.height)
+                    )
+                    :
+                    ''
+                :
+                this.index > 2 ? this.index -= 2 : ''
+        },
+        updata: function () {
+            var that = this;
+            if (!that.config.auto) {
+                clearInterval(that.time)
+            } else {
+                clearInterval(that.time)
+                that.time = setInterval(function () {
+                    if (that.index < that.config.length - 1) {
+                        that.index++
+                    } else {
+                        that.config.loop ?
+                            that.index = 0
+                            :
+                            (
+                                that.config.auto = false,
+                                that.updata(),
+                                that.config.callback ? that.config.callback() : ''
+                            )
+                    }
+
+                    that.render()
+                }, that.config.speed)
+            }
+        }
+    };
+    frame.prototype.init.prototype = frame.prototype
+    global.frame = frame;
+    global.frameData = [];
+    global.framePlay = function (name) {
+        if(name){
+            if(typeof name == 'object'){
+                for (var i = 0; i < global.frameData.length; i++) {
+                    for (var n = 0; n < name.length; n++) {
+                        global.frameData[i].config.name == name[n] ?
+                            (
+                                global.frameData[i].config.auto = true,
+                                global.frameData[i].updata()
+                            )
+                            :
+                            ''
+                    }
+                }
+            }else{
+                for (var i = 0; i < global.frameData.length; i++) {
+                    global.frameData[i].config.name == name ?
+                        (
+                            global.frameData[i].config.auto = true,
+                            global.frameData[i].updata()
+                        )
+                        :
+                        ''
+                }
+            }
+        }else{
+            for (var i = 0; i < global.frameData.length; i++) {
+                global.frameData[i].config.auto = true,
+                global.frameData[i].updata()
+            }
+        }
+        
+    };
+    global.framePause = function (name) {
+        if(name){
+            if(typeof name == 'object'){
+                for (var i = 0; i < global.frameData.length; i++) {
+                    for (var n = 0; n < name.length; n++) {
+                        global.frameData[i].config.name == name[n] ?
+                            (
+                                global.frameData[i].config.auto = false,
+                                global.frameData[i].updata()
+                            )
+                            :
+                            ''
+                    }
+                }
+            }else{
+                for (var i = 0; i < global.frameData.length; i++) {
+                    global.frameData[i].config.name == name ?
+                        (
+                            global.frameData[i].config.auto = false,
+                            global.frameData[i].updata()
+                        )
+                        :
+                        ''
+                }
+            }
+        }else{
+            for (var i = 0; i < global.frameData.length; i++) {
+                global.frameData[i].config.auto = false,
+                global.frameData[i].updata()
+            }
+        }
+    }
+})(this || window);
